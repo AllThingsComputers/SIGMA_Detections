@@ -1,0 +1,22 @@
+title: ntds.dit creation
+id: 54a91837-1ee1-4c1b-88be-615cf32683a0
+status: experimental 
+description:Detects the creation of a copy of the Active DIrectory database containing password and username hashes.
+references: 
+    - add later
+author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+date: 2021/11/01
+modified:
+tags: 
+    - attack.collection
+logsource: 
+    category: file_event
+    product: windows 
+detection: 
+    selection: 
+            TargetFilename|endswith: 
+            - '\ntds.dit'
+    condition: selection 
+falsepositives: 
+    - Rare Admin Activity. Very Unlikely.
+level: medium

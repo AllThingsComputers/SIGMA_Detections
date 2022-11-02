@@ -1,0 +1,29 @@
+title: Renamed Powershell Masquerading
+id: 982c5307-9119-428b-9013-e44a916c4e37
+status: experimental
+description: this Detects PowerShell cmdlets when the Executable name isn't Powershell which suggests a renaming has occurred to bypass defenses.
+references:
+    - https://attack.mitre.org/techniques/T1036/003/
+author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+date: 2021/11/01
+tags:
+    - attack.defense.evasion
+    - attack.t1036.003
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        CommandLine|contains: 
+         - 'IEX'
+         - '-NoProfile'
+         - '-ExecutionPolicy'
+         - 'Invoke-Expression'
+    filter:
+        Image|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+    condition: selection and not filter
+falsepositives:
+Admin using Legitimate third-party programs utilizing shared PowerShell cmdlets or a less common PowerShell variant that has a different name. 
+level: medium
