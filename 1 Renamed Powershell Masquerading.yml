@@ -4,6 +4,7 @@ status: experimental
 description: this Detects PowerShell cmdlets when the Executable name isn't Powershell which suggests a renaming has occurred to bypass defenses.
 references:
     - https://attack.mitre.org/techniques/T1036/003/
+    - https://medium.com/@TripleAAACybersecurity/detection-series-1-renamed-powershell-b677a8929ee0
 author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
 date: 2021/11/01
 tags:
