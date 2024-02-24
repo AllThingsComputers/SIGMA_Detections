@@ -1,7 +1,7 @@
 title: ntds.dit creation
 id: 54a91837-1ee1-4c1b-88be-615cf32683a0
 status: experimental 
-description:Detects the creation of a copy of the Active DIrectory database containing password and username hashes.
+description: Detects the creation of a copy of the Active DIrectory database containing password and username hashes.
 references: 
     - add later
 author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
