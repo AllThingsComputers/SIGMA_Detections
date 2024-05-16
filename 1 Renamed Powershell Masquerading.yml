@@ -26,5 +26,5 @@ detection:
             - '\pwsh.exe'
     condition: selection and not filter
 falsepositives:
-Admin using Legitimate third-party programs utilizing shared PowerShell cmdlets or a less common PowerShell variant that has a different name. 
+    - Admin using Legitimate third-party programs utilizing shared PowerShell cmdlets or a less common PowerShell variant that has a different name. 
 level: medium
