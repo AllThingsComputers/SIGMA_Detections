@@ -1,25 +1,25 @@
-title: Regex for PowerShell commands Variations
-id: 6bf73a3c-675c-4291-baaa-c515c57b0ef0 
-status: experimental 
-description: Using regex this detects when variations of parameters that attackers commonly use within PowerShell are called. 
-references: 
-    - https://attack.mitre.org/techniques/T1036/003/ 
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+title: Regex for PowerShell Command Variations
+id: 6bf73a3c-675c-4291-baaa-c515c57b0ef0
+status: experimental
+description: Detects variations of parameters commonly used by attackers within PowerShell commands using regex.
+references:
+  - https://attack.mitre.org/techniques/T1036/003/
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
-modified: 
-tags: 
-    - attack.defense.evasion 
-    - attack.t1036.003 
-logsource: 
-    category: process_creation 
-    product: windows 
-detection: 
-    selection: 
-        Image|endswith: 
-            - '\powershell.exe' 
-            - '\pwsh.exe' 
-        CommandLine|re: '(?i)-(e[ncoded]{0,6}[command]{0,7}|Noni[nteractive]{0,10}|w[indowstyle] hidden|Nop[rofile]{0,6}|E[xecution]{0,8}[Policy]{0,6} Bypass)\b' 
-    condition: selection 
-falsepositives: 
-    - Legitimate Admin Activity. Needs tuning to its environment due to its wide catchment. 
+tags:
+  - attack.defense_evasion
+  - attack.t1036.003
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+    CommandLine|re: > 
+      (?i)-(e[ncoded]{0,6}[command]{0,7}|Noni[nteractive]{0,10}|w[indowstyle] hidden|Nop[rofile]{0,6}|E[xecution]{0,8}[Policy]{0,6} Bypass)\b
+  condition: selection
+falsepositives:
+  - Legitimate administrative activity. Needs tuning to the environment due to its wide catchment.
 level: low
