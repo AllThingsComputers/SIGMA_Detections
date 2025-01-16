@@ -1,33 +1,32 @@
-title: Outlook Spawning and Office process with Suspicious Command line
+title: Outlook Spawning an Office Process with Suspicious Command Line
 id: d0e7ea59-11eb-48eb-8582-66cb89274e49
 status: experimental
-description: Detects potential phishing where outlook spawns an office executable which spawns a command line or script. This can indicate phishing.
-references:
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+description: Detects potential phishing where Outlook spawns an Office executable, which then spawns a command line or script. This can indicate phishing activity.
+references: []
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
-modified: 
 tags:
-    - attack.execution
-    - attack.t1059.001
+  - attack.execution
+  - attack.t1059.001
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection_parent1:
-        - ParentImage|endswith:
-            - '\outlook.exe'
-    selection_child1:
-        - Image|endswith:
-            - '\excel.exe'
-            - '\winword.exe'
-            - '\powerpnt.exe'
-            - '\mspub.exe'
-        - CommandLine|contains:
-            - 'powershell.exe' 
-            - 'cmd.exe'
-            - 'CScript.exe'
-            - 'WScript.exe'
-    condition: all of selection*
+  parent_process:
+    ParentImage|endswith:
+      - '\outlook.exe'
+  suspicious_child_process:
+    Image|endswith:
+      - '\excel.exe'
+      - '\winword.exe'
+      - '\powerpnt.exe'
+      - '\mspub.exe'
+    CommandLine|contains:
+      - 'powershell.exe'
+      - 'cmd.exe'
+      - 'CScript.exe'
+      - 'WScript.exe'
+  condition: parent_process and suspicious_child_process
 falsepositives:
-    - Legitimate downloads from Email
+  - Legitimate downloads or activities triggered from email.
 level: medium
