@@ -1,23 +1,21 @@
-title: Detect PsExec via the Registry 
+title: Detect PsExec via the Registry
 id: af5b7155-fe11-4dd1-a95d-721bca49a860
-status: experimental 
-description: Detect PsExec Usage via the Registry
-references: 
-    - add later
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+status: experimental
+description: Detect PsExec usage by monitoring registry keys associated with Sysinternals PsExec.
+references: []
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
-modified: 
-tags: 
-    - attack.execution
-logsource: 
-    category: registry_add
-    product: windows 
-detection: 
-    selection: 
-        EventType: CreateKey 
-        TargetObject|contains: 
-            - 'software\sysinternals\psexec\eulaaccepted'
-    condition: selection 
-falsepositives: 
-    - Legitimate PSExec usage by admins though this has fallen out of favor but check with your environment
+tags:
+  - attack.execution
+logsource:
+  category: registry_add
+  product: windows
+detection:
+  selection:
+    EventType: CreateKey
+    TargetObject|contains:
+      - 'software\sysinternals\psexec\eulaaccepted'
+  condition: selection
+falsepositives:
+  - Legitimate PsExec usage by administrators. This usage has decreased but verify with your environment.
 level: low
