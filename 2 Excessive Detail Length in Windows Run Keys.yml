@@ -1,27 +1,25 @@
 title: Excessive Detail Length in Windows Run Keys
 id: ce6c64ab-5877-4c21-a0c8-cd5fd1e73435
 status: experimental
-description: Run Key has an anomalous amount of data stored in it. Could be indicative of stored malcious command.
+description: Detects excessive data length in Windows Run keys, which could indicate a stored malicious command.
 references:
-    - https://cymulate.com/blog/what-is-fileless-attack/#:~:text=The%20fileless%20attack%20technique%20adds%20entries%20to%20%E2%80%9Crun,programs%20directly%20or%20list%20them%20as%20a%20dependency.
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
-date: 2021/11/01 
-modified: 
+  - https://cymulate.com/blog/what-is-fileless-attack/#:~:text=The%20fileless%20attack%20technique%20adds%20entries%20to%20%E2%80%9Crun,programs%20directly%20or%20list%20them%20as%20a%20dependency.
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
+date: 2021/11/01
 tags:
-    - attack.persistence
-    - attack.t1547.001
+  - attack.persistence
+  - attack.t1547.001
 logsource:
-    category: registry_set
-    product: windows
+  category: registry_set
+  product: windows
 detection:
-    selection:
-        EventType: SetValue
-        TargetObject|contains:
-            - '\Software\Microsoft\Windows\CurrentVersion\Run'
-            - '\Software\Microsoft\Windows\CurrentVersion\RunOnce'
-        Details|re:
-            - '.{100,}'
-    condition: selection
+  selection:
+    EventType: SetValue
+    TargetObject|contains:
+      - '\Software\Microsoft\Windows\CurrentVersion\Run'
+      - '\Software\Microsoft\Windows\CurrentVersion\RunOnce'
+    Details|re: '.{100,}'
+  condition: selection
 falsepositives:
-    - Legitimate autostart programs or details. Adjust character count to the environment. 
+  - Legitimate autostart programs or entries. Adjust character count threshold based on the environment.
 level: low
