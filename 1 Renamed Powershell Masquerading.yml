@@ -1,30 +1,30 @@
-title: Renamed Powershell Masquerading
+title: Renamed PowerShell Masquerading
 id: 982c5307-9119-428b-9013-e44a916c4e37
 status: experimental
-description: this Detects PowerShell cmdlets when the Executable name isn't Powershell which suggests a renaming has occurred to bypass defenses.
+description: Detects PowerShell cmdlets when the executable name isn't PowerShell, which suggests renaming to bypass defenses.
 references:
-    - https://attack.mitre.org/techniques/T1036/003/
-    - https://medium.com/@TripleAAACybersecurity/detection-series-1-renamed-powershell-b677a8929ee0
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+  - https://attack.mitre.org/techniques/T1036/003/
+  - https://allthingscomputers.medium.com/detection-series-1-renamed-powershell-b677a8929ee0
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
 tags:
-    - attack.defense.evasion
-    - attack.t1036.003
+  - attack.defense_evasion
+  - attack.t1036.003
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection:
-        CommandLine|contains: 
-         - 'IEX'
-         - '-NoProfile'
-         - '-ExecutionPolicy'
-         - 'Invoke-Expression'
-    filter:
-        Image|endswith:
-            - '\powershell.exe'
-            - '\pwsh.exe'
-    condition: selection and not filter
+  selection:
+    CommandLine|contains:
+      - 'IEX'
+      - '-NoProfile'
+      - '-ExecutionPolicy'
+      - 'Invoke-Expression'
+  filter:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  condition: selection and not filter
 falsepositives:
-    - Admin using Legitimate third-party programs utilizing shared PowerShell cmdlets or a less common PowerShell variant that has a different name. 
+  - Legitimate third-party programs using shared PowerShell cmdlets or uncommon PowerShell variants with different names.
 level: medium
