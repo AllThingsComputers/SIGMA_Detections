@@ -1,31 +1,30 @@
-
-title: Core Windows Processes not running from System32
+title: Core Windows Processes Not Running from System32
 id: 8d3e6bc7-322a-4776-8fff-d9b960882231
 status: experimental
-description: this rule detects Core Windows Processes not running from System32. If these processes are running from an alternate directory then they are likely not legitimate. 
-references: add a url here. maybe my own
-author: GitHub @TripleAAACyberSecurity  .   Twitter @AAACyber1
+description: Detects core Windows processes not running from the System32 directory. If these processes are executed from an alternate directory, they are likely not legitimate.
+references:
+  - Add my url here
+author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
-modified: 
 tags:
-    - attack.defense_evasion
+  - attack.defense_evasion
 logsource:
-    category: process_creation
-    product: windows
+  category: process_creation
+  product: windows
 detection:
-    selection:
-        Image|endswith: 
-        - '\cmd.exe'
-        - '\powershell.exe'
-        - '\reg.exe'
-        - '\calc.exe'
-        - '\wmiprvse.exe'
-        - '\cscipt.exe'
-        - '\msiexec.exe'
-        - '\wmic.exe'
-    filter:
-        - Image|contains: '\system32\'
-    condition: selection and not filter
+  selection:
+    Image|endswith:
+      - '\cmd.exe'
+      - '\powershell.exe'
+      - '\reg.exe'
+      - '\calc.exe'
+      - '\wmiprvse.exe'
+      - '\cscript.exe'
+      - '\msiexec.exe'
+      - '\wmic.exe'
+  filter:
+    Image|contains: '\system32\'
+  condition: selection and not filter
 falsepositives:
-    - IT Admin running a core windows exe to elsewhere though unlikely
+  - IT administrators running core Windows executables from alternate directories, though unlikely.
 level: high
