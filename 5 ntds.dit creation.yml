@@ -1,21 +1,20 @@
-title: Detect PsExec via the Registry
-id: af5b7155-fe11-4dd1-a95d-721bca49a860
+title: NTDS.dit Creation
+id: 54a91837-1ee1-4c1b-88be-615cf32683a0
 status: experimental
-description: Detect PsExec usage by monitoring registry keys associated with Sysinternals PsExec.
+description: Detects the creation of a copy of the Active Directory database (NTDS.dit) containing username and password hashes.
 references: []
 author: GitHub @AllThingsComputers, Twitter @AllThingsHandle
 date: 2021/11/01
 tags:
-  - attack.execution
+  - attack.collection
 logsource:
-  category: registry_add
+  category: file_event
   product: windows
 detection:
   selection:
-    EventType: CreateKey
-    TargetObject|contains:
-      - 'software\sysinternals\psexec\eulaaccepted'
+    TargetFilename|endswith:
+      - '\ntds.dit'
   condition: selection
 falsepositives:
-  - Legitimate PsExec usage by administrators. This usage has decreased but verify with your environment.
-level: low
+  - Rare administrative activity; very unlikely in most environments.
+level: medium
