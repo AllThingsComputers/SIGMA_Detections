@@ -18,7 +18,7 @@ detection:
     Image|endswith:
       - '\powershell.exe'
       - '\pwsh.exe'
-    CommandLine|re: > 
+    CommandLine|re: >
       (?i)-(e[ncoded]{0,6}[command]{0,7}|
       Noni[nteractive]{0,10}|
       w[indowstyle] hidden|
