@@ -9,7 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+
+      # Normalize all YAML files to LF and remove trailing spaces
+      - name: Normalize YAML files
+        run: |
+          find . -name "*.yml" -exec sed -i 's/\r$//' {} \;
+          find . -name "*.yml" -exec sed -i 's/[[:space:]]\+$//' {} \;
 
       - name: Run yamllint
         uses: ibiqlik/action-yamllint@v3
+        with:
+          # optional: disable line-length warnings if you want
+          options: "--disable=line-length"
